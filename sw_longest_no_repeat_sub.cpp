@@ -5,18 +5,20 @@
 using namespace std; 
 
 int findLength(string str) {
-    int windowStart = 0, maxLength = 0; 
-    unordered_map<char,int> charIndexMap; 
-    for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+    int start = 0, maxLen = 0; 
+    unordered_map<char, int> charIndexMap; 
+
+    for (int end = 0; end < str.length(); end++) {
         
-        if (charIndexMap.find(str[windowEnd]) != charIndexMap.end()) {
-            windowStart = max(windowStart, charIndexMap[str[windowEnd]]+1); 
+        if (charIndexMap.find(str[end]) != charIndexMap.end()) {
+            start = max(start, charIndexMap[str[end]] + 1); 
         }
 
-        charIndexMap[str[windowEnd]] = windowEnd; 
-        maxLength = max(maxLength, windowEnd - windowStart + 1); 
+        maxLen = max(maxLen, (end - start + 1)); 
+        charIndexMap[str[end]] = end; 
     }
-    return maxLength; 
+
+    return maxLen; 
 }
 
 int main() {

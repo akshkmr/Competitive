@@ -5,18 +5,19 @@
 using namespace std; 
 
 int findMinSubArray(int S, vector<int> arr) {
-   int windowStart = 0, minLength = numeric_limits<int>::max(), windowSum = 0; 
-   for (int windowEnd=0; windowEnd < arr.size(); windowEnd++) {
-       windowSum+=arr[windowEnd]; 
+   int start = 0, windowSum = 0, minLength = INT_MAX; 
+
+   for (int end = 0; end < arr.size(); end++) {
+       windowSum += arr[end]; 
 
        while (windowSum >= S) {
-        minLength = min(minLength, (windowEnd - windowStart + 1)); 
-        windowSum-=arr[windowStart]; 
-        windowStart++; 
+           minLength = min(minLength, end - start + 1); 
+           windowSum -= arr[start]; 
+           start++;  
        }
    }
 
-   return minLength == numeric_limits<int>::max() ? 0 : minLength; 
+   return minLength == INT_MAX ? 0 : minLength; 
 }
 
 int main() {

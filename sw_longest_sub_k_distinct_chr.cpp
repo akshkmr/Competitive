@@ -5,25 +5,28 @@
 using namespace std; 
 
 int findLength(string str, int k) {
-   int windowStart = 0, maxLength = 0; 
+   int start = 0, maxLength = 0; 
    unordered_map<char, int> charFrequencyMap; 
 
-   for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
-       charFrequencyMap[str[windowEnd]]++; 
-
+   for (int end = 0; end < str.length(); end++) {
+       charFrequencyMap[str[end]]++; 
+       
        while (charFrequencyMap.size() > k) {
-         charFrequencyMap[str[windowStart]]--; 
-         if (charFrequencyMap[str[windowStart]] == 0) {
-             charFrequencyMap.erase(str[windowStart]); 
-         }
-         windowStart++; 
+           
+           charFrequencyMap[str[start]]--;  
+           if (charFrequencyMap[str[start]] == 0) {
+               charFrequencyMap.erase(str[start]); 
+           } 
+
+           start++; 
        }
 
-       maxLength = max(maxLength, windowEnd - windowStart + 1); 
-   } 
+       maxLength = max(maxLength, end - start + 1);  
+   }
+
    return maxLength; 
 }
 
 int main() {
-    cout << findLength("cbbebi", 3); 
+    cout << findLength("araaci", 2); 
 }
