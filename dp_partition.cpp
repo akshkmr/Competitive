@@ -4,26 +4,27 @@
 using namespace std; 
 
 bool canPartitionRecursive(vector<vector<int>> &dp, vector<int> &nums, int sum, int currentIndex) {
-
+    
     if (sum == 0)
         return true; 
 
-    if (currentIndex >= nums.size())
+    if (sum <= 0 || currentIndex >= nums.size()) 
         return false; 
 
-    if (dp[currentIndex][sum] == -1) {
-        if (nums[currentIndex] <= sum) {
-            if (canPartitionRecursive(dp, nums, sum - nums[currentIndex], currentIndex + 1)) {
-                dp[currentIndex][sum] = 1; 
-                return true; 
-            }
-    }        
-
-    dp[currentIndex][sum] = canPartitionRecursive(dp, nums, sum, currentIndex+1); 
-    
+    if (dp[currentIndex][sum] != -1) {
+        return dp[currentIndex][sum]; 
     }
 
-    return dp[currentIndex][sum] == 1 ? true : false; 
+    if (nums[currentIndex] <= sum) {
+        if (canPartitionRecursive(dp, nums, sum - nums[currentIndex], currentIndex+1)) {
+            dp[currentIndex][sum] = 1; 
+            return true; 
+        }
+
+        dp[currentIndex][sum] = canPartitionRecursive(dp, nums, sum, currentIndex+1); 
+    }
+
+    return dp[currentIndex][sum]; 
 }
 
 bool canPartition(vector<int> &nums) {
@@ -41,6 +42,6 @@ bool canPartition(vector<int> &nums) {
 }
 
 int main() {
-    vector<int> nums = {1,2,3,4};
+    vector<int> nums = {2,3,4,6};
     cout << canPartition(nums) << endl; 
 }

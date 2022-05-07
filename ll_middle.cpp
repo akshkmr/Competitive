@@ -7,7 +7,7 @@ class Node {
         int value = 0;
         Node *next; 
 
-        Node(int value) {
+        Node(int value) {`
             this->value = value; 
             this->next = nullptr; 
         }
