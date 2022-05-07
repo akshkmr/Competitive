@@ -4,19 +4,20 @@
 using namespace std; 
 
 pair<int, int> pairWithTargetSum(vector<int> arr, int sum) {
-   int left = 0, right = arr.size() - 1; 
+   sort(arr.begin(), arr.end()); 
+   int start = 0, end = arr.size() - 1; 
 
-   while (left < right) {
-        int currentSum = arr[left] + arr[right]; 
-        if (currentSum == sum)
-            return {left, right}; 
-        else if (currentSum < sum) 
-            left++; 
-        else 
-            right--; 
+   while (start < end) {
+       int currentSum = arr[start] + arr[end]; 
+       if (currentSum == sum) return make_pair(arr[start], arr[end]); 
+       else if (currentSum < sum) {
+           start++;
+       } else {
+           end--; 
+       }
    }
 
-   return {-1,-1}; 
+   return make_pair(-1, -1); 
 }
 
 int main() {
