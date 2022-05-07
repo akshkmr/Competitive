@@ -43,14 +43,26 @@ bool isPalindrome(Node *head) {
 
     Node *headSecondHalf = reverse(slow); 
 
-    // Need to do this question (use stack)
+    Node* copyHeadSecondHalf = headSecondHalf; 
+
+    while (head != nullptr && headSecondHalf != nullptr) {
+        if (head->value != headSecondHalf->value) {
+            return false; 
+        }
+        head=head->next; 
+        headSecondHalf=headSecondHalf->next; 
+    }
+
+    reverse(copyHeadSecondHalf); 
+
+    return true; 
 }
 
 int main() {
     Node *head = new Node(2); 
     head->next = new Node(4); 
     head->next->next = new Node(6); 
-    head->next->next->next = new Node(4); 
+    head->next->next->next = new Node(5); 
     head->next->next->next->next = new Node(2); 
 
     cout << isPalindrome(head) << endl; 
